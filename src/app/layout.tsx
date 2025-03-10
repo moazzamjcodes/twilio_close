@@ -11,11 +11,12 @@ import type { Metadata } from "next";
 import NextTopLoader from "nextjs-toploader";
 import type { PropsWithChildren } from "react";
 import { Providers } from "./providers";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NextAdmin - Next.js Dashboard Kit",
-    default: "NextAdmin - Next.js Dashboard Kit",
+    template: "%s | Flipur",
+    default: "Flipur",
   },
   description:
     "Next.js admin dashboard toolkit with 200+ templates, UI components, and integrations for fast dashboard development.",
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             </div>
           </div>
         </Providers>
+        <Toaster position="top-right" />
       </body>
     </html>
   );

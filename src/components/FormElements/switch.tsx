@@ -7,6 +7,8 @@ type PropsType = {
   background?: "dark" | "light";
   backgroundSize?: "sm" | "default";
   name?: string;
+  checked?: boolean; // Accept checked state from the parent
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function Switch({
@@ -14,6 +16,8 @@ export function Switch({
   withIcon,
   backgroundSize,
   name,
+  checked = false, // Default to false if not provided
+  onChange
 }: PropsType) {
   const id = useId();
 
@@ -23,13 +27,16 @@ export function Switch({
       className="flex max-w-fit cursor-pointer select-none items-center"
     >
       <div className="relative">
-        <input type="checkbox" name={name} id={id} className="peer sr-only" />
+        <input type="checkbox" name={name} id={id} className="peer sr-only" checked={checked} onChange={onChange}/>
         <div
-          className={cn("h-8 w-14 rounded-full bg-gray-3 dark:bg-[#5A616B]", {
-            "h-5": backgroundSize === "sm",
-            "bg-[#212B36] dark:bg-primary": background === "dark",
-          })}
+          className={cn(
+            "h-8 w-14 rounded-full bg-gray-300 dark:bg-[#5A616B] peer-checked:bg-primary peer-checked:dark:bg-primary transition-colors",
+            {
+              "h-5": backgroundSize === "sm",
+            }
+          )}
         />
+        <div className="absolute left-1 top-1 flex size-6 items-center justify-center rounded-full bg-primary shadow-switch-1 transition peer-checked:right-1 peer-checked:translate-x-full" />
 
         <div
           className={cn(
